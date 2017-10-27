@@ -1,2 +1,2 @@
-App = class(function(
-end))
+App = abstract_class(function()
+end)
