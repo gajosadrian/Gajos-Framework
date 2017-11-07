@@ -9,6 +9,6 @@ ga.User = classExtends(App, function(id)
       return player(id, "name")
     end
     function self:SetName(name, hide)
-      setname(name, hide or 0)
+      setname(id, name, hide or 0)
     end
 end)
