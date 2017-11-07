@@ -1,6 +1,6 @@
 local ga = gajosframework
 
-ga.User = class(function(id)
+ga.User = classExtends(App, function(id)
     self._id = id
     self._logic = ga.UserLogic.new(id)
     self._view = ga.UserView.new(id)
