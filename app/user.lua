@@ -1,7 +1,9 @@
 local ga = gajosframework
 
 ga.User = class(function(id)
-    self.id = id
+    self._id = id
+    self._logic = ga.UserLogic.new(id)
+    self._view = ga.UserView.new(id)
     
     function self:GetName()
       return player(id, "name")
