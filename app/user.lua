@@ -9,29 +9,46 @@ end)
 ga.User.__index = function(self, key)
     local id = self.id
 
-    if key == 'x' then
-        return math.round(player(id, "x"))
-    elseif key == 'y' then
-        return math.round(player(id, "y"))
-    elseif key == 'name' then
-        return player(id, 'name')
-    else
-        return rawget(self, key)
-    end
+    return switch(case) {
+        x = function()
+            return math.round(player(id, 'x'))
+        end,
+
+        y = function()
+            return math.round(player(id, 'y'))
+        end,
+
+        name = function()
+            return player(id, 'name')
+        end,
+
+        [Default] = function()
+            rawget(self, key)
+        end,
+    }
 end
 
 ga.User.__newindex = function(self, key, value)
     local id = self.id
 
-    if key == 'x' then
-        setpos(id, value, self.y)
-    elseif key == 'y' then
-        setpos(id, self.x, value)
-    elseif key == 'name' then
-        setname(id, value, 0)
-    elseif key == 'name2' then
-        setname(id, value, 1)
-    else
-        rawset(self, key, value)
-    end
+    switch(case) {
+        x = function()
+            setpos(id, value, self.y)
+        end,
+
+        y = function()
+            setpos(id, self.x, value)
+        end,
+
+        name = function() -- server message while changing
+            setname(id, value, 0)
+        end,
+        name2 = function() -- hidden
+            setname(id, value, 1)
+        end,
+
+        [Default] = function()
+            rawset(self, key, value)
+        end,
+    }
 end
