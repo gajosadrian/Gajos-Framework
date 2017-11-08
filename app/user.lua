@@ -4,6 +4,10 @@ ga.User = classExtends(App, function(id)
     self.id = id
     self._logic = ga.UserLogic.new(id)
     self._view = ga.UserView.new(id)
+
+    self:setPos(x, y)
+        setpos(id, x, y)
+    end
 end)
 
 ga.User.__index = function(self, key)
@@ -192,6 +196,23 @@ ga.User.__newindex = function(self, key, value)
     local id = self.id
 
     switch(key) {
+        name = function() -- server message while changing
+            setname(id, value, 0)
+        end,
+        name2 = function() -- hidden
+            setname(id, value, 1)
+        end,
+
+        team = function()
+            if value == 1 then
+                maket(id)
+            elseif value == 2 then
+                makect(id)
+            else
+                makespec(id)
+            end
+        end,
+
         x = function()
             setpos(id, value, self.y)
         end,
@@ -200,11 +221,36 @@ ga.User.__newindex = function(self, key, value)
             setpos(id, self.x, value)
         end,
 
-        name = function() -- server message while changing
-            setname(id, value, 0)
+        health = function()
+            sethealth(id, value)
         end,
-        name2 = function() -- hidden
-            setname(id, value, 1)
+
+        armor = function()
+            setarmor(id, value)
+        end,
+
+        money = function()
+            setmoney(id, value)
+        end,
+
+        score = function()
+            setscore(id, value)
+        end,
+
+        deaths = function()
+            setdeaths(id, value)
+        end,
+
+        weapontype = function()
+            setweapon(id, value)
+        end,
+
+        speedmod = function()
+            speedmod(id, value)
+        end,
+
+        maxhealth = function()
+            setmaxhealth(id, value)
         end,
 
         [Default] = function()
