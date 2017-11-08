@@ -10,9 +10,9 @@ ga.User.__index = function(self, key)
     local id = self.id
 
     if key == 'x' then
-        return player(id, "x")
+        return math.round(player(id, "x"))
     elseif key == 'y' then
-        return player(id, "y")
+        return math.round(player(id, "y"))
     elseif key == 'name' then
         return player(id, 'name')
     else
