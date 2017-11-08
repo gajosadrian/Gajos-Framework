@@ -9,7 +9,7 @@ end)
 ga.User.__index = function(self, key)
     local id = self.id
 
-    return switch(case) {
+    return switch(key) {
         x = function()
             return math.round(player(id, 'x'))
         end,
@@ -31,7 +31,7 @@ end
 ga.User.__newindex = function(self, key, value)
     local id = self.id
 
-    switch(case) {
+    switch(key) {
         x = function()
             setpos(id, value, self.y)
         end,
