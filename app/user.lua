@@ -30,7 +30,7 @@ ga.User = classExtends(App, function(id)
     end
 
     function self:killCustom(killer, weapon)
-        killplayer(killer, weapon, id)
+        customkill(killer, weapon, id)
     end
 
     function self:slap()
