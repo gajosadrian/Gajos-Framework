@@ -20,6 +20,8 @@ ga.User.__index = function(self, key)
         return player(id, "x")
     elseif key == 'y' then
         return player(id, "y")
+    elseif key == 'name' then
+        return player(id, 'name')
     else
         return rawget(self, key)
     end
@@ -32,6 +34,10 @@ ga.User.__newindex = function(self, key, value)
         setpos(id, value, self.y)
     elseif key == 'y' then
         setpos(id, self.x, value)
+    elseif key == 'name' then
+        setname(id, value, 0)
+    elseif key == 'name2' then
+        setname(id, value, 1)
     else
         rawset(self, key, value)
     end
