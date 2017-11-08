@@ -4,13 +4,6 @@ ga.User = classExtends(App, function(id)
     self.id = id
     self._logic = ga.UserLogic.new(id)
     self._view = ga.UserView.new(id)
-
-    function self:GetName()
-        return player(id, "name")
-    end
-    function self:SetName(name, hide)
-        setname(id, name, hide or 0)
-    end
 end)
 
 ga.User.__index = function(self, key)
