@@ -5,11 +5,62 @@ ga.User = classExtends(App, function(id)
     self._logic = ga.UserLogic.new(id)
     self._view = ga.UserView.new(id)
 
-    self:setPos(x, y)
+    function self:kick(reason)
+        kick(id, reason)
+    end
+
+    function self:banIp(duration, reason)
+        banip(self.ip, duration, reason)
+    end
+
+    function self:banName(duration, reason)
+        banname(self.name, duration, reason)
+    end
+
+    function self:banSteam(duration, reason)
+        bansteam(self.steam, duration, reason)
+    end
+
+    function self:banUsgn(duration, reason)
+        banusgn(self.usgn, duration, reason)
+    end
+
+    function self:kill()
+        killplayer(id)
+    end
+
+    function self:killCustom(killer, weapon)
+        killplayer(killer, weapon, id)
+    end
+
+    function self:slap()
+        slap(id)
+    end
+
+    function self:setPos(x, y)
         setpos(id, x, y)
+    end
+
+    function self:spawn(x, y)
+        spawnplayer(id, x, y)
+    end
+
+    function self:reroute(address)
+        reroute(id, address)
+    end
+
+    function self:shake(power)
+        shake(id, power)
+    end
+
+    function self:strip(weapon)
+        strip(id, weapon)
     end
 end)
 
+-----------------
+-- APP & LOGIC --
+-----------------
 ga.User.__index = function(self, key)
     local id = self.id
 
