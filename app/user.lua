@@ -221,6 +221,14 @@ ga.User.__newindex = function(self, key, value)
             setpos(id, self.x, value)
         end,
 
+        tilex = function()
+            setpos(id, misc.tile_to_pixel(value), self.y)
+        end,
+
+        tiley = function()
+            setpos(id, self.x, misc.tile_to_pixel(value))
+        end,
+
         health = function()
             sethealth(id, value)
         end,
