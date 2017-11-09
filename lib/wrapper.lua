@@ -6,6 +6,10 @@ function banname(name, duration, reason)
     parse('banname ' .. name .. ' ' .. duration .. ' "' .. reason .. '"')
 end
 
+function bansteam(id, duration, reason)
+    parse('bansteam ' .. id .. ' ' .. duration .. ' "' .. reason .. '"')
+end
+
 function banusgn(id, duration, reason)
     parse('banusgn ' .. id .. ' ' .. duration .. ' "' .. reason .. '"')
 end
