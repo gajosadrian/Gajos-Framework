@@ -13,4 +13,7 @@ ga.Menu = classExtends(App, function(id)
 
     function self:noskip()
     end
+
+    function self:show()
+    end
 end
