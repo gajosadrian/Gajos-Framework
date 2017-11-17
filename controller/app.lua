@@ -1,2 +1,2 @@
-App = abstract_class(function()
+Controller = abstract_class(function()
 end)
