@@ -16,7 +16,7 @@ ga.User = classExtends(Controller, function(id)
     self._view = ga.UserView.new(user)
 
     --[[
-        @param {string} title   - Menu's title
+        @param {string} title   - menu's title
         @param {bool} [noskip]  - true means that you must use one of 1-9 buttons
     ]]
     function self:newMenu(title, noskip)
