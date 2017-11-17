@@ -1,8 +1,8 @@
 local ga = gajosframework
 
-ga.User = classExtends(App, function(id)
+ga.User = classExtends(Controller, function(id)
     self.id = id
-    self._logic = ga.UserLogic.new(id)
+    self._logic = ga.UserModel.new(id)
     self._view = ga.UserView.new(id)
 
     function self:kick(reason)
