@@ -18,7 +18,7 @@ ga.User = classExtends(Controller, function(id)
     end
 
     function self:banSteam(duration, reason)
-        bansteam(self.steam, duration, reason)
+        bansteam(self.steamid, duration, reason)
     end
 
     function self:banUsgn(duration, reason)
@@ -83,6 +83,18 @@ ga.User.__index = function(self, key)
 
         usgn = function()
             return player(id, 'usgn')
+        end,
+
+        usgnname = function()
+            return player(id, 'usgnname')
+        end,
+
+        steamid = function()
+            return player(id, 'steamid')
+        end,
+
+        steamname = function()
+            return player(id, 'steamname')
         end,
 
         ping = function()
@@ -235,6 +247,22 @@ ga.User.__index = function(self, key)
 
         screenh = function()
             return player(id, 'screenh')
+        end,
+
+        mousex = function()
+            return player(id, 'mousex')
+        end,
+
+        mousey = function()
+            return player(id, 'mousey')
+        end,
+
+        mousemapx = function()
+            return player(id, 'mousemapx')
+        end,
+
+        mousemapy = function()
+            return player(id, 'mousemapy')
         end,
 
         [Default] = function()
