@@ -1,5 +1,15 @@
 local ga = gajosframework
 
+ga.users = {}
+
+function newPlayer(id)
+    ga.users[id] = ga.User.new(id)
+end
+
+function getPlayerInstance(id)
+    return ga.users[id]
+end
+
 ga.User = classExtends(Controller, function(id)
     self.id = id
     self._model = ga.UserModel.new(id)
