@@ -12,8 +12,6 @@ end
 
 ga.User = classExtends(Controller, function(id)
     self.id = id
-    self._model = ga.UserModel.new(user)
-    self._view = ga.UserView.new(user)
 
     --[[
         @param {string} title   - Menu's title
