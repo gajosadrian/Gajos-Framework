@@ -10,7 +10,7 @@ function getPlayerInstance(id)
     return ga.users[id]
 end
 
-ga.User = classExtends(Controller, function(id)
+ga.User = class(function(id)
     self.id = id
 
     --[[
