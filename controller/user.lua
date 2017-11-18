@@ -20,7 +20,7 @@ ga.User = classExtends(Controller, function(id)
         @param {bool} [noskip]  - true means that you must use one of 1-9 buttons
     ]]
     function self:newMenu(title, noskip)
-        ga.Menu(self, title, noskip)
+        return ga.Menu(self, title, noskip)
     end
 
     function self:kick(reason)
