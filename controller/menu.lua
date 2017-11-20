@@ -13,8 +13,12 @@ ga.Menu = classExtends(Controller, function(user, title, noskip)
         self.model:setType(type)
     end
 
-    function self:noskip(state)
-        self.model:noskip(state)
+    function self:setNoskip(state)
+        self.model:setNoskip(state)
+    end
+
+    function self:noskip()
+        self:setNoskip(true)
     end
 
     function self:show()
