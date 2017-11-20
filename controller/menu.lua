@@ -31,3 +31,7 @@ ga.Menu = classExtends(Controller, function(user, title, noskip)
     self:setTitle(title)
     self:noskip(noskip or false)
 end
+
+local function onMenu(id, t, btn)
+end
+addhook('menu', onMenu)
