@@ -17,8 +17,7 @@ ga.Menu = classExtends(Model, function(controller, user)
             str = '(' .. str .. ')'
         end
 
-        local t = {}
-        table.insert(t, {
+        table.insert(self.buttons, {
             name = name:gsub('|', 'l'):gsub(',', '.'),
             desc = desc:gsub('|', 'l'):gsub(',', '.'),
             str = str,
