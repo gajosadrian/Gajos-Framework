@@ -20,7 +20,7 @@ ga.User = class(function(id)
     function self:newMenu(title, noskip)
         return ga.Menu.new(self, title, noskip)
     end
-    self.cached_menu = false
+    self._cached_menu = false
 
     function self:kick(reason)
         kick(id, reason)
