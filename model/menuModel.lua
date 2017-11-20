@@ -1,8 +1,8 @@
 local ga = gajosframework
 
 ga.Menu = classExtends(Model, function(controller, user)
-    self.id = id
     self.controller = controller
+    self.user = user
     self.type = ''
     self.title = ''
     self.noskip = false
