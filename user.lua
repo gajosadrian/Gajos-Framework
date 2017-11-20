@@ -18,7 +18,7 @@ ga.User = class(function(id)
         @param {bool} [noskip]  - true means that you must use one of 1-9 buttons
     ]]
     function self:newMenu(title, noskip)
-        return ga.Menu(self, title, noskip)
+        return ga.Menu.new(self, title, noskip)
     end
     self.cached_menu = false
 
