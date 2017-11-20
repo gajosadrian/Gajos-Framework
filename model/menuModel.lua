@@ -12,7 +12,7 @@ ga.Menu = classExtends(Model, function(controller, user)
         local name = name:gsub('|', 'l'):gsub(',', '.')
         local desc = desc:gsub('|', 'l'):gsub(',', '.')
 
-        local str = name .. '|' .. self.desc
+        local str = name .. '|' .. desc
         if not visible then
             str = '(' .. str .. ')'
         end
