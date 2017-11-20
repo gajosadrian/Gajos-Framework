@@ -33,5 +33,15 @@ ga.Menu = classExtends(Controller, function(user, title, noskip)
 end
 
 local function onMenu(id, t, btn)
+    local user = getPlayerInstance(id)
+    local cached_menu = user.cached_menu
+    local are_pages = t:find('#')
+    local page = 1
+
+    if are_pages then
+        page = tonumber(misc.toTable(t, '#')[2])
+    end
+
+    user.cached_menu.model:onMenu(...)
 end
 addhook('menu', onMenu)
