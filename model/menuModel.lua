@@ -6,8 +6,23 @@ ga.Menu = classExtends(Model, function(controller, user)
     self.type = ''
     self.title = ''
     self.noskip = false
+    self.buttons = {}
 
-    function self:addButton(name, desc, visible, onClick)
+    function self:addButton(name, desc, onClick, visible)
+        local name = name:gsub('|', 'l'):gsub(',', '.')
+        local desc = desc:gsub('|', 'l'):gsub(',', '.')
+
+        local str = name .. '|' .. self.desc
+        if not visible then
+            str = '(' .. str .. ')'
+        end
+
+        local t = {}
+        table.insert(t, {
+            name = name:gsub('|', 'l'):gsub(',', '.'),
+            desc = desc:gsub('|', 'l'):gsub(',', '.'),
+            str = str,
+        })
     end
 
     function self:setType(type)
@@ -37,4 +52,6 @@ ga.Menu = classExtends(Model, function(controller, user)
     function self:show()
         self.view:show()
     end
+
+    controller.cached_menu = self
 end
