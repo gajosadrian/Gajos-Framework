@@ -40,6 +40,6 @@ local function onMenu(id, t, btn)
         page = tonumber(misc.toTable(t, '#')[2])
     end
 
-    user._cached_menu.model:onMenu(...)
+    user._cached_menu.model:onMenu(page, btn, are_pages)
 end
 addhook('menu', onMenu)
