@@ -3,7 +3,7 @@ local ga = gajosframework
 ga.Menu = classExtends(Model, function(user)
     self.user = user
 
-    function self:show(title, menu_type, buttons, page)
+    function self:show(controller, title, menu_type, buttons, page)
         page = (not page or page > math.ceil(#buttons / 7)) and 1 or page
 
         local loop_start, loop_end
