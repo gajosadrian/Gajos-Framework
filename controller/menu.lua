@@ -22,7 +22,7 @@ ga.Menu = classExtends(Controller, function(user, title, noskip)
     end
 
     function self:show(page)
-        self.view:show(self, self.model.title, self.model.type, self.model.buttons, page)
+        self.view:show(self.model.title, self.model.type, self.model.buttons, page)
         user._cached_menu = self
     end
 
