@@ -5,6 +5,8 @@ ga.Menu = classExtends(Controller, function(user, title, noskip)
     self.model = ga.MenuModel.new(self, user)
     self.view = ga.MenuView.new(user)
 
+    self.cached_menu = false
+
     function self:addButton(name, desc, visible, onClick)
         self.model:addButton(name, desc, visible, onClick)
     end
@@ -21,8 +23,8 @@ ga.Menu = classExtends(Controller, function(user, title, noskip)
         self:setNoskip(true)
     end
 
-    function self:show()
-        self.view:show()
+    function self:show(page)
+        self.view:show(self, self.model.title, self.model.type, self.model.buttons, page)
     end
 
     -- constructor
