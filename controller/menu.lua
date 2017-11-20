@@ -23,6 +23,7 @@ ga.Menu = classExtends(Controller, function(user, title, noskip)
 
     function self:show(page)
         self.view:show(self, self.model.title, self.model.type, self.model.buttons, page)
+        user._cached_menu = self
     end
 
     -- constructor
@@ -32,7 +33,6 @@ end
 
 local function onMenu(id, t, btn)
     local user = getPlayerInstance(id)
-    local cached_menu = user.cached_menu
     local are_pages = t:find('#')
     local page = 1
 
@@ -40,6 +40,6 @@ local function onMenu(id, t, btn)
         page = tonumber(misc.toTable(t, '#')[2])
     end
 
-    user.cached_menu.model:onMenu(...)
+    user._cached_menu.model:onMenu(...)
 end
 addhook('menu', onMenu)
