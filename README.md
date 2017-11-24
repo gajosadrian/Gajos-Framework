@@ -13,7 +13,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 Your framework copy goes here:
 ```
-/sys/lua/
+/sys/lua/<mod_name>/
 ```
 
 ### Installing
@@ -70,7 +70,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 * **Adrian Gajos** - *Initial work* - [Gaiyos](http://unrealsoftware.de/profile.php?userid=18271)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/gajosadrian/Gajos-Framework/contributors) who participated in this project.
 
 ## License
 
