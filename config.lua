@@ -1,0 +1,5 @@
+gajosframework = {
+    users = {},
+    VAR = {},
+    COLORS = {},
+}

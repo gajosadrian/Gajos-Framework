@@ -1,22 +1,5 @@
 local ga = gajosframework
 
-function enumDir(dir)
-    local t = {}
-
-    for name in io.enumdir(dir) do
-        if name ~= '.' and name ~= '..' then
-            table.insert(t, name)
-        end
-    end
-
-    return t
-end
-
-function getPath()
-    local str = debug.getinfo(2, 'S').source:sub(2)
-    return str:match('(.*/)')
-end
-
 function ga.getMessage(message, type, custom_tag)
     local tag = switch() {
         warning = function()
@@ -36,7 +19,7 @@ function ga.getMessage(message, type, custom_tag)
         end,
 
         [Default] = function()
-            '\169' .. VAR.server_color
+            return '\169' .. VAR.server_color
         end,
     }
 
