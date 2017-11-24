@@ -1,4 +1,4 @@
-function getDirectories(dir)
+function enumDir(dir)
     local t = {}
 
     for name in io.enumdir(dir) do
