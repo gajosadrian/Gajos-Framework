@@ -1,4 +1,4 @@
 local ga = gajosframework
 
-ga.MenuView = classExtends(Model, function()
+ga.VehicleView = classExtends(Model, function()
 end)
