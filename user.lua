@@ -1,7 +1,5 @@
 local ga = gajosframework
 
-ga.users = {}
-
 function newPlayer(id)
     ga.users[id] = ga.User.new(id)
 end
@@ -283,6 +281,7 @@ ga.User.__index = function(self, key)
         end,
 
         [Default] = function()
+            print(key)
             rawget(self, key)
         end,
     }

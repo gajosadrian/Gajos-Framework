@@ -17,8 +17,6 @@ end
 
 local _DIR = getPath()
 
-dofile(_DIR .. 'config.lua')
-
 do
     local dir = _DIR .. 'lib/'
     for _, v in pairs(enumDir(dir)) do
@@ -28,5 +26,11 @@ do
     end
 end
 
+dofile(_DIR .. 'config.lua')
 dofile(_DIR .. 'functions.lua')
 dofile(_DIR .. 'user.lua')
+
+--test
+local ga = gajosframework
+local user = ga.User.new(1)
+print(user.name)
