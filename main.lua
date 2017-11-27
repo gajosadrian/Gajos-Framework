@@ -17,26 +17,29 @@ end
 
 local _DIR = getPath()
 
-dofile(_DIR .. 'functions.lua')
-
 do
-    local dirs = {
-        _DIR .. 'lib/',
-        _DIR .. 'app/',
-    }
+    local dir = _DIR .. 'lib/'
 
-    dofile(_DIR .. 'app/config.lua')
-
-    for k, dir in pairs(dirs) do
-        for _, v in pairs(enumDir(dir)) do
-            if v:sub(-4) == '.lua' then
-                dofile(dir .. v)
-            end
+    for _, v in pairs(enumDir(dir)) do
+        if v:sub(-4) == '.lua' then
+            dofile(dir .. v)
         end
     end
-
-    dofile(_DIR .. 'app/main.lua')
 end
 
 dofile(_DIR .. 'config.lua')
+dofile(_DIR .. 'functions.lua')
 dofile(_DIR .. 'user.lua')
+dofile(_DIR .. 'hook.lua')
+
+do
+    local dir = _DIR .. 'app/',
+
+    dofile(_DIR .. 'app/config.lua', true)
+    for _, v in pairs(enumDir(dir)) do
+        if v:sub(-4) == '.lua' and v ~= 'config.lua' and v ~= 'main.lua' then
+            dofile(dir .. v)
+        end
+    end
+    dofile(_DIR .. 'app/main.lua', true)
+end

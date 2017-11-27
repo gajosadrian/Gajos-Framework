@@ -4,6 +4,10 @@ function newPlayer(id)
     ga.users[id] = ga.User.new(id)
 end
 
+function destructPlayer(id)
+    ga.users[id] = nil
+end
+
 function getPlayerInstance(id)
     return ga.users[id]
 end
