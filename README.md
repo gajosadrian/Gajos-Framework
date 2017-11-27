@@ -11,7 +11,7 @@ These instructions will get you a copy of the project up and running on your loc
 * CS2D
 * Lua scripts
 
-```
+```lua
 local mod_name = 'gajosframework'
 
 -- wrapper --
