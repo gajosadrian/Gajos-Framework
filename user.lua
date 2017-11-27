@@ -77,7 +77,7 @@ end)
 -- APP & LOGIC --
 -----------------
 ga.User.__index = function(self, key)
-    local id = self.id
+    local id = rawget(self, 'id')
 
     return switch(key) {
         exists = function()
@@ -281,14 +281,13 @@ ga.User.__index = function(self, key)
         end,
 
         [Default] = function()
-            print(key)
             rawget(self, key)
         end,
     }
 end
 
 ga.User.__newindex = function(self, key, value)
-    local id = self.id
+    local id = rawget(self, 'id')
 
     switch(key) {
         name = function() -- server message while changing

@@ -1,36 +1,36 @@
-local ga = gajosframework
+-- local ga = gajosframework
 
-function ga.getMessage(message, type, custom_tag)
-    local tag = switch() {
-        warning = function()
-            return COLOR.red
-        end,
+-- function ga.getMessage(message, type, custom_tag)
+--     local tag = switch() {
+--         warning = function()
+--             return COLOR.red
+--         end,
 
-        info = function()
-            return COLOR.blue
-        end,
+--         info = function()
+--             return COLOR.blue
+--         end,
 
-        alert = function()
-            return COLOR.orange
-        end,
+--         alert = function()
+--             return COLOR.orange
+--         end,
 
-        success = function()
-            return COLOR.light_green_accent
-        end,
+--         success = function()
+--             return COLOR.light_green_accent
+--         end,
 
-        [Default] = function()
-            return '\169' .. VAR.server_color
-        end,
-    }
+--         [Default] = function()
+--             return '\169' .. VAR.server_color
+--         end,
+--     }
 
-    tag = tag .. (custom_tag or VAR.server_tag)
-    local txt = tag .. ': ' .. COLOR.white
+--     tag = tag .. (custom_tag or VAR.server_tag)
+--     local txt = tag .. ': ' .. COLOR.white
 
-    message = message:gsub('[>][>]', COLOR.red_lighten)
-    message = message:gsub('[<][<]', COLOR.white)
+--     message = message:gsub('[>][>]', COLOR.red_lighten)
+--     message = message:gsub('[<][<]', COLOR.white)
 
-    return txt .. message
-end
+--     return txt .. message
+-- end
 
 _dofile = dofile
 function dofile(path, create)
@@ -39,9 +39,9 @@ function dofile(path, create)
             local file = io.open(path, 'w')
             io.close(file)
 
-            print2('The file "'..path..'" couldn\'t be found or opened, creating new one...', 'notice')
+            print('The file "'..path..'" couldn\'t be found or opened, creating new one...', 'notice')
         else
-            print2('The file "'..path..'" couldn\'t be found or opened!', 'error')
+            print('The file "'..path..'" couldn\'t be found or opened!', 'error')
         end
 
         return false

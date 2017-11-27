@@ -526,8 +526,8 @@ function setmoney(player,money)
     parse('setmoney '..player..' '..money)
 end
 
-function setname(player,name)
-    parse('setname '..player..' '..name)
+function setname(player,name,hide)
+    parse('setname '..player..' "'..name..'" '..hide)
 end
 
 function setpos(player,x,y)

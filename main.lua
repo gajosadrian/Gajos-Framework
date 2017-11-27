@@ -17,20 +17,26 @@ end
 
 local _DIR = getPath()
 
+dofile(_DIR .. 'functions.lua')
+
 do
-    local dir = _DIR .. 'lib/'
-    for _, v in pairs(enumDir(dir)) do
-        if v:sub(-4) == '.lua' then
-            dofile(dir .. v)
+    local dirs = {
+        _DIR .. 'lib/',
+        _DIR .. 'app/',
+    }
+
+    dofile(_DIR .. 'app/config.lua')
+
+    for k, dir in pairs(dirs) do
+        for _, v in pairs(enumDir(dir)) do
+            if v:sub(-4) == '.lua' then
+                dofile(dir .. v)
+            end
         end
     end
+
+    dofile(_DIR .. 'app/main.lua')
 end
 
 dofile(_DIR .. 'config.lua')
-dofile(_DIR .. 'functions.lua')
 dofile(_DIR .. 'user.lua')
-
---test
-local ga = gajosframework
-local user = ga.User.new(1)
-print(user.name)
