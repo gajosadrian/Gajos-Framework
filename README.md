@@ -11,6 +11,17 @@ These instructions will get you a copy of the project up and running on your loc
 * CS2D
 * Lua scripts
 
+```
+local mod_name = 'gajosframework'
+
+-- wrapper --
+local function getPath()
+    local str = debug.getinfo(2, 'S').source:sub(2)
+    return str:match('(.*/)')
+end
+dofile(getPath() .. mod_name .. '/main.lua')
+```
+
 Your framework copy goes here:
 ```
 /sys/lua/<mod_name>/
