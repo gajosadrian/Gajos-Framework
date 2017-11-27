@@ -48,12 +48,8 @@ local hooks = {
     },
 }
 
-for _, v in pairs(hooks) do
-    local category = _
-
-    for k, w in pairs(v) do
-        local hook_name = w
-
+for category, v in pairs(hooks) do
+    for k, hook_name in pairs(v) do
         ga.core_hook[hook_name] = function(...)
             local func = _G['on' .. category .. hook_name:gsub('^%l', string.upper)]
             local arg = {...}
