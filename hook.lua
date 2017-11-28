@@ -9,12 +9,12 @@ function addhook(name, func, priority)
         return
     end
 
+    ga.hooks[name] = ga.hooks[name] or {}
     local hook = ga.hooks[name]
-    ga.hooks[name] = hook or {}
 
     table.insert(hook, {
         func = func,
-        priority = priority,
+        priority = priority or false,
     })
 end
 

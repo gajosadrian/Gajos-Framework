@@ -33,7 +33,7 @@ ga.MenuModel = classExtends(Model, function(controller, user)
 
             invisible = function()
                 self.type = '@i'
-            end
+            end,
 
             [Default] = function()
                 self.type = ''
@@ -66,7 +66,11 @@ ga.MenuModel = classExtends(Model, function(controller, user)
         end
 
         if not are_pages then
-            self.buttons[btn].onClick(user)
+            local func = self.buttons[btn].onClick
+
+            if func then
+                func(user)
+            end
         else
             if btn <= 7 then
                 self.buttons[(page - 1) * 7 + btn].onClick(user)
@@ -77,4 +81,4 @@ ga.MenuModel = classExtends(Model, function(controller, user)
     end
 
     controller.cached_menu = self
-end
+end)

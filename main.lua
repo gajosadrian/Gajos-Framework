@@ -33,6 +33,19 @@ dofile(_DIR .. 'user.lua')
 dofile(_DIR .. 'hook.lua')
 
 do
+    for _, v in pairs( {'model', 'view', 'controller'} ) do
+        local dir = _DIR .. v .. '/'
+        dofile(dir .. v .. '.lua')
+
+        for k, w in pairs(enumDir(dir)) do
+            if w:sub(-4) == '.lua' and w ~= v .. '.lua' then
+                dofile(dir .. w)
+            end
+        end
+    end
+end
+
+do
     local dir = _DIR .. 'app/',
 
     dofile(_DIR .. 'app/config.lua', true)

@@ -1,12 +1,12 @@
 local ga = gajosframework
 
-ga.Menu = classExtends(Controller, function(user, title, noskip)
+Menu = classExtends(Controller, function(user, title, noskip)
     self.user = user
     self.model = ga.MenuModel.new(self, user)
     self.view = ga.MenuView.new(user)
 
-    function self:addButton(name, desc, visible, onClick)
-        self.model:addButton(name, desc, visible, onClick)
+    function self:addButton(name, desc, onClick, visible)
+        self.model:addButton(name, desc, onClick, (visible == nil) and true or visible)
     end
 
     function self:setMenuType(type)
@@ -27,9 +27,9 @@ ga.Menu = classExtends(Controller, function(user, title, noskip)
     end
 
     -- constructor
-    self:setTitle(title)
+    self.model:setTitle(title)
     self:noskip(noskip or false)
-end
+end)
 
 local function onMenu(id, t, btn)
     local user = getPlayerInstance(id)

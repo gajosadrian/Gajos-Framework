@@ -12,7 +12,8 @@ function getPlayerInstance(id)
     return ga.users[id]
 end
 
-ga.User = class(function(id)
+ga.User = {}
+Class(ga.User, function(id)
     self.id = id
 
     --[[
@@ -62,6 +63,10 @@ ga.User = class(function(id)
 
     function self:spawn(x, y)
         spawnplayer(id, x, y)
+    end
+
+    function self:equip(item_id)
+        equip(id, item_id)
     end
 
     function self:reroute(address)
@@ -188,7 +193,7 @@ ga.User.__index = function(self, key)
             return player(id, 'teambuildingkills')
         end,
 
-        weapontype = function()
+        weapon = function()
             return player(id, 'weapontype')
         end,
 
@@ -347,7 +352,7 @@ ga.User.__newindex = function(self, key, value)
             setdeaths(id, value)
         end,
 
-        weapontype = function()
+        weapon = function()
             setweapon(id, value)
         end,
 
