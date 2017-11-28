@@ -11,6 +11,14 @@ These instructions will get you a copy of the project up and running on your loc
 * CS2D
 * Lua scripts
 
+/sys/lua/server.lua
+```lua
+local mod_name = 'gajosframework'
+
+-- init --
+dofile('sys/lua/' .. mod_name .. '/main.lua')
+```
+
 Your framework copy goes here:
 ```
 /sys/lua/<mod_name>/
