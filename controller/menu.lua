@@ -1,6 +1,6 @@
 local ga = gajosframework
 
-Menu = classExtends(Controller, function(user, title, noskip)
+ga.Menu = classExtends(Controller, function(user, title, noskip)
     self.user = user
     self.model = ga.MenuModel.new(self, user)
     self.view = ga.MenuView.new(user)
