@@ -30,6 +30,7 @@ function ga.getMessage(message, type, custom_tag)
     local tag = tag_color .. (custom_tag or VAR.server_tag)
     local txt = tag .. ': ' .. COLOR.white
 
+    message = tostring(message)
     message = message:gsub('[>][>]', COLOR.red_lighten)
     message = message:gsub('[<][<]', COLOR.white)
 

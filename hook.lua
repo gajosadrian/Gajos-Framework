@@ -44,7 +44,7 @@ local hooks = {
         'always', 'attack', 'attack2', 'bombdefuse', 'bombexplode', 'bombplant', 'build', 'buildattempt', 'buy', 'clientdata', 'collect', 'die', 'dominate',
         'drop', 'flagcapture', 'flagtake', 'flashlight', 'hit', 'hostagerescue', 'join', 'kill', 'leave', 'menu', 'move', 'movetile', 'name', 'radio',
         'reload', 'say', 'sayteam', 'select', 'serveraction', 'shieldhit', 'spawn', 'specswitch', 'spray', 'suicide', 'team', 'use', 'usebutton',
-        'vipescape', 'vote', 'walkover',
+        'vipescape', 'vote', 'walkover', 'bind',
     },
 }
 
@@ -60,6 +60,8 @@ for category, v in pairs(hooks) do
                     table.remove(new_arg, 1)
 
                     func(getPlayerInstance(arg[1]), unpack(new_arg))
+                else
+                    func(unpack(arg))
                 end
             end
 

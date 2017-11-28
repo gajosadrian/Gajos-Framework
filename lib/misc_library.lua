@@ -220,6 +220,31 @@ function misc.pos_trigger(x, y, rot, power)
 	return new_x, new_y
 end
 
+function misc.screen_border_dist(rot)
+    local type
+
+    -- 16:9 screen
+    if rot >= 0 and rot <= 60 then
+        type = 1
+    elseif rot >= 61 and rot <= 120 then
+        type = 2
+    elseif rot >= 121 and rot <= 240 then
+        type = 1
+    elseif rot >= 241 and rot <= 300 then
+        type = 2
+    elseif rot >= 301 and rot <= 360 then
+        type = 1
+    end
+
+    rot = math.rad(rot)
+
+    if type == 1 then
+        return math.floor(math.abs(240 / math.cos(rot)))
+    elseif type == 2 then
+        return math.floor(math.abs(425 / math.sin(rot)))
+    end
+end
+
 function misc.isInside(x,y,x1,y1,x2,y2)
     return ((x >= x1) and (y >= y1) and (x <= x2) and (y <= y2))
 end
