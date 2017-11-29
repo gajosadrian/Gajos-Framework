@@ -187,12 +187,14 @@ end
 
 -- calculate the direction beetween 2 points
 function misc.point_direction(x1,y1,x2,y2)
-	return -math.deg(math.atan2(x1-x2,y1-y2))
+    local dir = -math.round(math.deg(math.atan2(x1-x2,y1-y2)))
+    if dir < 0 then dir = dir + 360 end
+    return dir
 end
 
 -- calculate the distance beetween 2 points
 function misc.point_distance(x1,y1,x2,y2)
-	return math.sqrt((x1-x2)^2 + (y1-y2)^2)
+	return math.round(math.sqrt((x1-x2)^2 + (y1-y2)^2))
 end
 
 -- primitive way to calculate the distance beetween 2 points

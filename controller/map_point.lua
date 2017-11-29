@@ -1,29 +1,34 @@
 local ga = gajosframework
 
-MapPoint = classExtends(Controller, function(user, path, x, y, rotate)
+ga.MapPoint_list = {}
+ga.MapPoint = classExtends(Controller, function(user, path, x, y, alpha, rotate)
     self.user = user
     self.model = ga.MapPointModel.new(self, user)
     self.view = ga.MapPointView.new(user)
 
-    function self:update()
-        local playerX, playerY = user.x, user.y
-        local dist = misc.point_distance(playerX, playerY, x, y)
-        local angle = misc.point_direction(playerX, playerY, x, y)
-        local edge = misc.screen_border_dist(angle)
-        local rot = 0
-        if rotate then
-            rot = angle
-        end
+    self.x, self.y = misc.tile_to_pixel(x), misc.tile_to_pixel(y)
 
-        if dist > edge then
-            local newX, newY = misc.pos_trigger(playerX, playerY, angle, edge)
-            imagepos(point.img.image, newX, newY, rot)
-        else
-            imagepos(point.img.image, point.x, point.y, rot)
-        end
+    function self:update()
+        self.view:update(self.model.img, self.x, self.y, rotate)
+    end
+
+    function self:setColor(r, g, b)
+        self.view:setColor(self.model.img, r, g, b)
     end
 
     function self:remove()
-
+        self.model:remove()
+        table.removeValue(ga.MapPoint_list, self)
     end
+
+    -- constructor --
+    self.model:init(path, alpha)
+    table.insert(ga.MapPoint_list, self)
 end)
+
+local function onMs100()
+    for _, v in pairs(ga.MapPoint_list) do
+        v:update()
+    end
+end
+addhook('ms100', onMs100)

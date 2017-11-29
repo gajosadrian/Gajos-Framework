@@ -1,6 +1,6 @@
 local ga = gajosframework
 
-ga.MenuView = classExtends(Model, function(user)
+ga.MenuView = classExtends(View, function(user)
     self.user = user
 
     function self:show(title, menu_type, buttons, page)

@@ -1,4 +1,4 @@
 local ga = gajosframework
 
-ga.VehicleView = classExtends(Model, function()
+ga.VehicleView = classExtends(View, function()
 end)

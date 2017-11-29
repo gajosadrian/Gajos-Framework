@@ -62,7 +62,10 @@ function onPlayerServeraction(user, key)
 end
 
 function onPlayerJoined(user)
-    user.mainMenu:show()
+    -- user.mainMenu:show()
+    local p1 = user:newMapPoint('gfx/hud_arrow.bmp', 45, 53, 1, true)
+    local p2 = user:newMapPoint('gfx/hud_arrow.bmp', 16, 16, 1, true)
+    p2:setColor(255, 0, 0)
 end
 
 

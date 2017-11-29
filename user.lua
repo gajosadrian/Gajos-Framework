@@ -36,6 +36,10 @@ Class(ga.User, function(id)
         return self._gui:newHudtxt(...)
     end
 
+    function self:newMapPoint(...)
+        return ga.MapPoint.new(self, ...)
+    end
+
     function self:kick(reason)
         kick(id, reason)
     end
