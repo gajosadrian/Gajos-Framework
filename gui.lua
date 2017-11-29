@@ -2,11 +2,38 @@ local ga = gajosframework
 
 ga.GUI = class(function(user)
     self.user = user
+
+    -- windows --
     self.clicked = false
 
     function self:newWindow(...)
         local window = ga.GUI_Window.new(self, ...)
         return window
+    end
+
+    -- hudtxts --
+	self.is_hudtxt = {}
+	for i = 0, 49 do
+		self.is_hudtxt[i] = true
+    end
+
+    function self:newHudtxt(...)
+        local hudtxt = ga.GUI_Hudtxt.new(self, ...)
+        return hudtxt
+    end
+
+    function self:requestHudtxtId()
+        for i = 0, 49 do
+            if self.is_hudtxt[i] then
+                self.is_hudtxt[i] = false
+                return i
+            end
+        end
+        return -1
+    end
+
+    function self:addHudtxtId(hudtxt_id)
+        self.is_hudtxt[hudtxt_id] = true
     end
 end)
 
@@ -97,13 +124,13 @@ ga.GUI_Button = class(function(window, style, align, x, y)
         self.hover_img = TImage.LoadGUIImage(ga.DIR.gfx .. '1x1.png', self.img_x, self.img_y, TFlags(nil), user.id)
         self.hover_img:SetScale(self.style.width, self.style.height)
         self.hover_img:SetAlpha(0)
-	elseif self.style.hover_path then
+    elseif self.style.hover_path then
         self.hover_img = TImage.LoadGUIImage(self.style.hover_path, self.img_x, self.img_y, TFlags(nil), user.id)
         self.hover_img:SetAlpha(0)
-	end
+    end
 
     self.onClick = false
-	self.onHover = false
+    self.onHover = false
     self.hovered = false
     self.hudtxts = {}
 
@@ -178,6 +205,42 @@ ga.GUI_Button = class(function(window, style, align, x, y)
     table.insert(ga.GUI_Button_list, self)
 end)
 
+ga.GUI_Hudtxt = class(function(gui, text, x, y, align, gui_obj_align, gui_obj)
+    local screenw, screenh = 850, 480
+
+    self.user = gui.user; local user = self.user
+    self.gui = gui
+    self.text = text
+    self.x, self.y = ga.GUI.fixpos(gui_obj_align, screenw, screenh, 0, 16, x, y)
+    self.align = align or 0
+
+    if gui_obj then
+        self.x, self.y = ga.GUI.fixpos(gui_obj_align, gui_obj.style.width, gui_obj.style.height, 0, 16, x, y)
+        self.x = self.x + gui_obj.x
+        self.y = self.y + gui_obj.y
+    end
+
+    self.hudtxt_id = self.gui:requestHudtxtId()
+    hudtxt2(self.user.id, self.hudtxt_id, text, self.x, self.y, align)
+
+    function self:setText(txt)
+        self:remove()
+        user:addHudtxt(txt or "", x, y, align, gui_obj_align, gui_obj)
+    end
+
+    function self:move(duration, x, y)
+        if x then self.x = self.x + x end
+        if y then self.y = self.y + y end
+
+        hudtxtmove(self.user.id, self.hudtxt_id, duration, self.x, self.y)
+    end
+
+    function self:remove()
+        hudtxt2(self.user.id, self.hudtxt_id, " ", 0, 0, 0)
+        self.gui:addHudtxtId(self.hudtxt_id)
+    end
+end)
+
 -- static methods --
 function ga.GUI_Window.AddStyle(key, tab)
     ga.GUI_Window_styles[key] = tab
@@ -212,24 +275,24 @@ end
 local function update(user)
     local x, y = user.mousex, user.mousey
 
-	for _, v in pairs(ga.GUI_Button_list) do
+    for _, v in pairs(ga.GUI_Button_list) do
         if v.user == user then
             if misc.isInside(x, y, v.x, v.y, v.x + v.style.width, v.y + v.style.height) then
                 if user._gui.clicked then
-					v:click()
-				else
+                    v:click()
+                else
                     local func = function()
                         v:hover()
-					end
-					timerEx(1, func, 1)
-				end
-			else
-				v:unhover()
-			end
-		end
-	end
+                    end
+                    timerEx(1, func, 1)
+                end
+            else
+                v:unhover()
+            end
+        end
+    end
 
-	user._gui.clicked = false
+    user._gui.clicked = false
 end
 
 local function onClick(id, key, state)
@@ -253,8 +316,8 @@ local function onHover()
     for _, id in pairs(player(0, 'table')) do
         local user = getPlayerInstance(id)
         reqcld(user.id, 0)
-		update(user)
-	end
+        update(user)
+    end
 end
 addhook('ms100', onHover)
 
@@ -262,10 +325,10 @@ addhook('ms100', onHover)
 function onClientdata(id, mode, x, y)
     local user = getPlayerInstance(id)
 
-	if not user then return end
+    if not user then return end
 
-	if mode == 0 then
-		user.mousex, user.mousey = x, y
-	end
+    if mode == 0 then
+        user.mousex, user.mousey = x, y
+    end
 end
 addhook('clientdata', onClientdata)

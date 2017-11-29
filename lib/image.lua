@@ -41,9 +41,14 @@ function freeimage(imageid)
 	end
 end
 
-function images.Remove(id)
+function images.remove(id)
 	for i, v in pairs(images.user[id]) do
 		_freeimage(v)
 	end
 	images.user[id] = {}
 end
+
+local function onLeave(id)
+	images.remove(id)
+end
+addhook('leave', onLeave)

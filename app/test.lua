@@ -44,10 +44,12 @@ end
 function onPlayerServeraction(user, key)
     if key == 1 then
         local window = user:newWindow('ga_mainmenu', 'tl', 0, 40)
+        window:addHudtxt('Button 123', 0, 0, 2, 'br')
         local btn = window:addButton('slot', 'c', 0, 0)
         btn.onClick = function()
             msg('works')
         end
+        btn:addHudtxt('BTN', 0, 0, 1, 'c')
     elseif key == 3 then
         local menu = user:newMenu('Test title', true)
         menu:addButton('Test button', 'test description', function()

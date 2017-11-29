@@ -17,6 +17,7 @@ Class(ga.User, function(id)
     self.id = id
 
     self.mainMenu = ga.MainMenu.new(self)
+    self._gui = ga.GUI.new(self)
 
     --[[
         @param {string} title   - menu's title
@@ -27,9 +28,12 @@ Class(ga.User, function(id)
     end
     self._cached_menu = false
 
-    self._gui = ga.GUI.new(self)
     function self:newWindow(...)
         return self._gui:newWindow(...)
+    end
+
+    function self:addHudtxt(...)
+        return self._gui:newHudtxt(...)
     end
 
     function self:kick(reason)
