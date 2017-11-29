@@ -44,7 +44,7 @@ end
 function onPlayerServeraction(user, key)
     if key == 1 then
         local window = user:newWindow('ga_mainmenu', 'tl', 0, 40)
-        window:addHudtxt('Button 123', 0, 0, 2, 'br')
+        window:addHudtxt('Button 123', 0, 0, 2, 0, false, 'br')
         local btn = window:addButton('slot', 'c', 0, 0)
         btn.onClick = function()
             msg('works')

@@ -66,8 +66,8 @@ ga.GUI_Window = class(function(gui, style, align, x, y)
         return button
     end
 
-    function self:addHudtxt(text, x, y, align, window_align)
-        local hudtxt = user:addHudtxt(text, x, y, align, window_align, self)
+    function self:addHudtxt(text, x, y, align, valign, size, window_align)
+        local hudtxt = user:addHudtxt(text, x, y, align, valign, size, window_align, self)
         table.insert(self.hudtxts, hudtxt)
 
         return hudtxt
@@ -169,8 +169,8 @@ ga.GUI_Button = class(function(window, style, align, x, y)
         end
     end
 
-    function self:addHudtxt(text, x, y, align, button_align)
-        local hudtxt = user:addHudtxt(text, x, y, align, button_align, self)
+    function self:addHudtxt(text, x, y, align, valign, size, button_align)
+        local hudtxt = user:addHudtxt(text, x, y, align, valign, size, button_align, self)
         table.insert(self.hudtxts, hudtxt)
 
         return hudtxt
@@ -205,7 +205,7 @@ ga.GUI_Button = class(function(window, style, align, x, y)
     table.insert(ga.GUI_Button_list, self)
 end)
 
-ga.GUI_Hudtxt = class(function(gui, text, x, y, align, gui_obj_align, gui_obj)
+ga.GUI_Hudtxt = class(function(gui, text, x, y, align, valign, size, gui_obj_align, gui_obj)
     local screenw, screenh = 850, 480
 
     self.user = gui.user; local user = self.user
@@ -213,6 +213,8 @@ ga.GUI_Hudtxt = class(function(gui, text, x, y, align, gui_obj_align, gui_obj)
     self.text = text
     self.x, self.y = ga.GUI.fixpos(gui_obj_align, screenw, screenh, 0, 16, x, y)
     self.align = align or 0
+    self.valign = valign or 0
+    self.size = size or 13
 
     if gui_obj then
         self.x, self.y = ga.GUI.fixpos(gui_obj_align, gui_obj.style.width, gui_obj.style.height, 0, 16, x, y)
@@ -221,11 +223,11 @@ ga.GUI_Hudtxt = class(function(gui, text, x, y, align, gui_obj_align, gui_obj)
     end
 
     self.hudtxt_id = self.gui:requestHudtxtId()
-    hudtxt2(self.user.id, self.hudtxt_id, text, self.x, self.y, align)
+    hudtxt2(self.user.id, self.hudtxt_id, self.text, self.x, self.y, self.align, self.valign, self.size)
 
     function self:setText(txt)
         self:remove()
-        user:addHudtxt(txt or "", x, y, align, gui_obj_align, gui_obj)
+        user:addHudtxt(txt or '', x, y, self.align, self.valign, self.size, gui_obj_align, gui_obj)
     end
 
     function self:move(duration, x, y)
@@ -236,7 +238,7 @@ ga.GUI_Hudtxt = class(function(gui, text, x, y, align, gui_obj_align, gui_obj)
     end
 
     function self:remove()
-        hudtxt2(self.user.id, self.hudtxt_id, " ", 0, 0, 0)
+        hudtxt2(self.user.id, self.hudtxt_id, '', 0, 0, 0, 0, false)
         self.gui:addHudtxtId(self.hudtxt_id)
     end
 end)

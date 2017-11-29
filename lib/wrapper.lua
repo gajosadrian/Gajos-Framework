@@ -106,12 +106,13 @@ function flashposition(x,y,intensity)
     parse('flashposition '..x..' '..y..' '..intensity)
 end
 
-function hudtxt(id,text,x,y,align)
-    parse('hudtxt '..id..' "'..text..'" '..x..' '..y..' '..align)
+function hudtxt(id,text,x,y,align,valign,size)
+    parse('hudtxt '..id..' "'..text..'" '..x..' '..y..' '..align..' '..valign..' '..size)
 end
 
-function hudtxt2(player,id,text,x,y,align)
-    parse('hudtxt2 '..player..' '..id..' "'..text..'" '..x..' '..y..' '..align)
+function hudtxt2(player,id,text,x,y,align,valign,size)
+    print(player,id,text,x,y,align,valign,size)
+    parse('hudtxt2 '..player..' '..id..' "'..text..'" '..x..' '..y..' '..align..' '..valign..' '..size)
 end
 
 function hudtxtalphafade(player,id,duration,alpha)
