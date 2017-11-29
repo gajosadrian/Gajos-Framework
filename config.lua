@@ -1,5 +1,8 @@
 gajosframework = {
     users = {},
+    DIR = {
+        gfx = 'gfx/gajosframework/',
+    },
 }
 
 COLOR_VALUE = {

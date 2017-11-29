@@ -54,6 +54,14 @@ for category, v in pairs(hooks) do
             local func = _G['on' .. category .. hook_name:gsub('^%l', string.upper)]
             local arg = {...}
 
+            if hook_name == 'join' then
+                newPlayer(arg[1])
+            elseif hook_name == 'leave' then
+                destructPlayer(arg[1])
+            elseif hook_name == 'bind' then
+                --
+            end
+
             if func then
                 if category == 'Player' then
                     local new_arg = table.shallowCopy(arg)
@@ -63,12 +71,6 @@ for category, v in pairs(hooks) do
                 else
                     func(unpack(arg))
                 end
-            end
-
-            if hook_name == 'join' then
-                newPlayer(arg[1])
-            elseif hook_name == 'leave' then
-                destructPlayer(arg[1])
             end
 
             return callHook(hook_name, ...)

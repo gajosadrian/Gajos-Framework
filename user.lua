@@ -16,6 +16,8 @@ ga.User = {}
 Class(ga.User, function(id)
     self.id = id
 
+    self.mainMenu = ga.MainMenu.new(self)
+
     --[[
         @param {string} title   - menu's title
         @param {bool} [noskip]  - true means that you must use one of 1-9 buttons
@@ -24,6 +26,11 @@ Class(ga.User, function(id)
         return ga.Menu.new(self, title, noskip)
     end
     self._cached_menu = false
+
+    self._gui = ga.GUI.new(self)
+    function self:newWindow(...)
+        return self._gui:newWindow(...)
+    end
 
     function self:kick(reason)
         kick(id, reason)

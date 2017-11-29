@@ -17,6 +17,9 @@ end
 
 local _DIR = getPath()
 
+dofile(_DIR .. 'config.lua')
+dofile(_DIR .. 'hook.lua')
+
 do
     local dir = _DIR .. 'lib/'
 
@@ -27,10 +30,9 @@ do
     end
 end
 
-dofile(_DIR .. 'config.lua')
 dofile(_DIR .. 'functions.lua')
 dofile(_DIR .. 'user.lua')
-dofile(_DIR .. 'hook.lua')
+dofile(_DIR .. 'gui.lua')
 
 do
     for _, v in pairs( {'model', 'view', 'controller'} ) do
@@ -56,3 +58,6 @@ do
     end
     dofile(_DIR .. 'app/main.lua', true)
 end
+
+_VER = '1.00'
+print('\169109104238Lua: Successfully loaded `Gajos Framework ' .. _VER .. '`')
