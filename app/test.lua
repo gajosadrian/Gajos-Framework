@@ -1,6 +1,6 @@
 local ga = gajosframework
 
-mp_respawndelay(255) -- 4min 15s
+-- mp_respawndelay(255) -- 4min 15s
 mp_hudscale(1)
 
 ga.GUI_Window.AddStyle('ga_mainmenu', {
@@ -61,7 +61,7 @@ function onPlayerServeraction(user, key)
     end
 end
 
-function onPlayerTeam(user)
+function onPlayerJoined(user)
     user.mainMenu:show()
 end
 

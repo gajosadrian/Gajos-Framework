@@ -58,8 +58,13 @@ for category, v in pairs(hooks) do
                 newPlayer(arg[1])
             elseif hook_name == 'leave' then
                 destructPlayer(arg[1])
-            elseif hook_name == 'bind' then
-                --
+            elseif hook_name == 'team' then
+                local user = getPlayerInstance(arg[1])
+
+                if not user.joined then
+                    user.joined = true
+                    _G['onPlayerJoined'](user)
+                end
             end
 
             if func then

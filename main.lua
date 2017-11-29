@@ -48,14 +48,25 @@ do
 end
 
 do
-    local dir = _DIR .. 'app/',
+    local dirs = {
+        'app/',
+        'app/model',
+        'app/view',
+        'app/controller',
+    }
 
     dofile(_DIR .. 'app/config.lua', true)
-    for _, v in pairs(enumDir(dir)) do
-        if v:sub(-4) == '.lua' and v ~= 'config.lua' and v ~= 'main.lua' then
-            dofile(dir .. v)
+
+    for k, w in pairs(dirs) do
+        local dir = _DIR .. w
+
+        for _, v in pairs(enumDir(dir)) do
+            if v:sub(-4) == '.lua' and v ~= 'config.lua' and v ~= 'main.lua' then
+                dofile(dir .. v)
+            end
         end
     end
+
     dofile(_DIR .. 'app/main.lua', true)
 end
 
