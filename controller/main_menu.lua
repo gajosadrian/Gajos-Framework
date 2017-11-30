@@ -71,7 +71,6 @@ ga.GUI_Button.AddStyle('ga_bigslot', {
 })
 
 ga.GUI_Button.AddStyle('ga_nav_item', {
-    -- path = 'debug',
-    width = 100,
+    width = 80,
     height = 25,
 })

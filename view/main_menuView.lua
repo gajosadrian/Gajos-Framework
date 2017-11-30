@@ -2,7 +2,7 @@ local ga = gajosframework
 
 ga.MainMenuView = classExtends(View, function(user)
     local this = self
-    local room_speed = 500
+    local room_speed = 400
     self.user = user
 
     self.nav_items = {}
@@ -85,7 +85,7 @@ ga.MainMenuView = classExtends(View, function(user)
 
         local hudtxt_size = 16
         local root_x, root_y = 40, 20
-        local adder = 100
+        local adder = 80
         local img_y = root_y + hudtxt_size + 50
 
         do
@@ -119,6 +119,10 @@ ga.MainMenuView = classExtends(View, function(user)
     end
 
     function self:loadNavItem(nav_item_id, name, onShow, instant)
+        if self.current_nav_item == nav_item_id and not instant then
+            return false
+        end
+
         local adder
         if nav_item_id > self.current_nav_item then
             adder = 850
@@ -143,5 +147,7 @@ ga.MainMenuView = classExtends(View, function(user)
             window:go(room_speed, -adder, false)
             self.window = window
         end
+
+        return true
     end
 end)
