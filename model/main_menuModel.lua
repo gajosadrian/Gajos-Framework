@@ -3,8 +3,10 @@ local ga = gajosframework
 ga.MainMenuModel = classExtends(Model, function(controller, user)
     self.controller = controller
     self.user = user
+
     self.background = false
     self.nav_items = false
+    self.pages = false
 
     function self:setBackground(path)
         self.background = TImage.LoadGUIImage(path, 425, 240, TFlags(nil), user.id)
@@ -17,5 +19,9 @@ ga.MainMenuModel = classExtends(Model, function(controller, user)
 
     function self:setNavItems(items)
         self.nav_items = items
+    end
+
+    function self:setPages(pages)
+        self.pages = pages
     end
 end)

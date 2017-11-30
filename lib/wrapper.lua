@@ -111,7 +111,6 @@ function hudtxt(id,text,x,y,align,valign,size)
 end
 
 function hudtxt2(player,id,text,x,y,align,valign,size)
-    print(player,id,text,x,y,align,valign,size)
     parse('hudtxt2 '..player..' '..id..' "'..text..'" '..x..' '..y..' '..align..' '..valign..' '..size)
 end
 

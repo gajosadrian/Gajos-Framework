@@ -3,12 +3,6 @@ local ga = gajosframework
 mp_respawndelay(255) -- 4min 15s
 mp_hudscale(1)
 
-ga.GUI_Window.AddStyle('ga_mainmenu', {
-    path = 'gfx/test.jpg',
-    width = 850,
-    height = 400,
-})
-
 ga.GUI_Button.AddStyle('slot', {
     path = 'debug',
     hover_path = 'auto',
@@ -18,24 +12,41 @@ ga.GUI_Button.AddStyle('slot', {
 
 function onPlayerJoin(user)
     local menu = user.mainMenu
-    menu:setBackground('gfx/starwars/menu-background.jpg', 0.2)
+    menu:setBackground('gfx/starwars/menu-background.jpg', 0.3)
     menu:setNavItems({
         {
             name = 'HOME',
-            onShow = function(user)
-                msg('home')
+            onShow = function(user, window)
+                local btn = window:addButton('slot', 'c', 0, 0)
+                btn.onClick = function()
+                    msg('works')
+                end
+                btn:addHudtxt('First button', 0, 0, 'c')
             end,
         },
         {
             name = 'SOLDIER',
-            onShow = function(user)
-                msg('soldier')
+            onShow = function(user, window)
+                local btn = window:addButton('slot', 'c', 0, 0)
+                btn.onClick = function()
+                    msg('works2')
+                end
+                btn:addHudtxt('Second button', 0, 0, 'c')
             end,
         },
         {
             name = 'STORE',
-            onShow = function(user)
+            onShow = function(user, window)
                 msg('store')
+            end,
+        },
+    })
+
+    menu:setPages({
+        {
+            name = 'Options',
+            onShow = function()
+                msg('options')
             end,
         },
     })
@@ -43,13 +54,7 @@ end
 
 function onPlayerServeraction(user, key)
     if key == 1 then
-        local window = user:newWindow('ga_mainmenu', 'tl', 0, 40)
-        window:addHudtxt('Button 123', 0, 0, 2, 0, false, 'br')
-        local btn = window:addButton('slot', 'c', 0, 0)
-        btn.onClick = function()
-            msg('works')
-        end
-        btn:addHudtxt('BTN', 0, 0, 'c')
+        return
     elseif key == 3 then
         local menu = user:newMenu('Test title', true)
         menu:addButton('Test button', 'test description', function()

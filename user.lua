@@ -16,7 +16,6 @@ ga.User = {}
 Class(ga.User, function(id)
     self.id = id
 
-    self.mainMenu = ga.MainMenu.new(self)
     self._gui = ga.GUI.new(self)
     self._prev_weapon = false
 
@@ -112,6 +111,9 @@ Class(ga.User, function(id)
     function self:strip(weapon)
         strip(id, weapon)
     end
+
+    -- constructor --
+    self.mainMenu = ga.MainMenu.new(self)
 end)
 
 -----------------

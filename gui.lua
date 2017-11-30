@@ -58,6 +58,7 @@ ga.GUI_Window = class(function(gui, style, align, x, y)
 
     self.buttons = {}
     self.hudtxts = {}
+    self.images = {}
 
     function self:addButton(...)
         local button = ga.GUI_Button.new(self, ...)
@@ -73,6 +74,34 @@ ga.GUI_Window = class(function(gui, style, align, x, y)
         return hudtxt
     end
 
+    function self:insertImage(img)
+        table.insert(self.images, img)
+    end
+
+    function self:removeImage(img)
+        table.removeValue(self.images, img)
+    end
+
+    function self:go(duration, x, y)
+        if x then self.x = self.x + x end
+        if y then self.y = self.y + y end
+        if self.img then
+            self.img:AnimatePosition(duration, self.x, self.y, 0)
+        end
+
+        for _, v in pairs(self.buttons) do
+            v:go(duration, x, y)
+        end
+
+        for _, v in pairs(self.hudtxts) do
+            v:go(duration, x, y)
+        end
+
+        for _, v in pairs(self.images) do
+            v:AnimatePosition(duration, x, y, 0)
+        end
+    end
+
     function self:remove()
         if self.img then
             self.img:Remove()
@@ -86,6 +115,10 @@ ga.GUI_Window = class(function(gui, style, align, x, y)
 
         for _, v in pairs(self.hudtxts) do
             v:remove()
+        end
+
+        for _, v in pairs(self.images) do
+            v:Remove()
         end
 
         table.removeValue(ga.GUI_Window_list, self)
@@ -184,6 +217,29 @@ ga.GUI_Button = class(function(window, style, align, x, y)
         end
     end
 
+    function self:setRot(rot)
+        self.img:SetPosition(self.img.x, self.img.y, rot)
+    end
+
+    function self:go(duration, x, y)
+        if x then self.x = self.x + x end
+        if y then self.y = self.y + y end
+        if self.img or self.hover_img then
+            if x then self.img_x = self.img_x + x end
+            if y then self.img_y = self.img_y + y end
+        end
+        if self.img then
+            self.img:AnimatePosition(duration, self.img_x, self.img_y, 0)
+        end
+        if self.hover_img then
+            self.hover_img:AnimatePosition(duration, self.img_x, self.img_y, 0)
+        end
+
+        for _, v in pairs(self.hudtxts) do
+            v:go(duration, x, y)
+        end
+    end
+
     function self:remove()
         if self.img then
             self.img:Remove()
@@ -256,7 +312,11 @@ ga.GUI_Hudtxt = class(function(gui, text, x, y, gui_obj_align, size, gui_obj)
         user:addHudtxt(txt or '', x, y, gui_obj_align, self.size, gui_obj)
     end
 
-    function self:move(duration, x, y)
+    function self:setAlpha(alpha, duration)
+        hudtxtalphafade(user.id, self.hudtxt_id, duration or 1, alpha)
+    end
+
+    function self:go(duration, x, y)
         if x then self.x = self.x + x end
         if y then self.y = self.y + y end
 
@@ -264,7 +324,7 @@ ga.GUI_Hudtxt = class(function(gui, text, x, y, gui_obj_align, size, gui_obj)
     end
 
     function self:remove()
-        hudtxt2(self.user.id, self.hudtxt_id, '', 0, 0, 0, 0, false)
+        hudtxt2(self.user.id, self.hudtxt_id, '', 0, 0, 0, 0, '')
         self.gui:addHudtxtId(self.hudtxt_id)
     end
 end)
