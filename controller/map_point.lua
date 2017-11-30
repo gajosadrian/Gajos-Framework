@@ -32,3 +32,12 @@ local function onMs100()
     end
 end
 addhook('ms100', onMs100)
+
+local function onLeave(id)
+    for _, v in pairs(ga.MapPoint_list) do
+        if v.user.id == id then
+            v:remove()
+        end
+    end
+end
+addhook('leave', onLeave)

@@ -18,6 +18,7 @@ Class(ga.User, function(id)
 
     self.mainMenu = ga.MainMenu.new(self)
     self._gui = ga.GUI.new(self)
+    self._prev_weapon = false
 
     --[[
         @param {string} title   - menu's title
@@ -30,6 +31,22 @@ Class(ga.User, function(id)
 
     function self:newWindow(...)
         return self._gui:newWindow(...)
+    end
+
+    function self:hideWeapon()
+        if not self._prev_weapon and self.weapon ~= 0 then
+            self._prev_weapon = self.weapon
+            self:equip(41)
+            self.weapon = 41
+        end
+    end
+
+    function self:showWeapon()
+        if self._prev_weapon then
+            self.weapon = self._prev_weapon
+            self._prev_weapon = false
+            self:strip(41)
+        end
     end
 
     function self:addHudtxt(...)

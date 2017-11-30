@@ -4,6 +4,8 @@ ga.MainMenu = classExtends(Controller, function(user)
     self.model = ga.MainMenuModel.new(self, user)
     self.view = ga.MainMenuView.new(user)
 
+    self.current_nav_item = 1
+
     function self:setBackground(path, darkness)
         self.model:setBackground(path)
 
@@ -14,6 +16,10 @@ ga.MainMenu = classExtends(Controller, function(user)
 
     function self:show()
         self.view:showBackground(self.model.background)
+    end
+
+    function self:hide()
+        self.view:hideBackground(self.model.background)
     end
 
     function self:setNavItems(items)

@@ -66,8 +66,8 @@ ga.GUI_Window = class(function(gui, style, align, x, y)
         return button
     end
 
-    function self:addHudtxt(text, x, y, align, valign, size, window_align)
-        local hudtxt = user:addHudtxt(text, x, y, align, valign, size, window_align, self)
+    function self:addHudtxt(text, x, y, window_align, size)
+        local hudtxt = user:addHudtxt(text, x, y, window_align, size, self)
         table.insert(self.hudtxts, hudtxt)
 
         return hudtxt
@@ -169,8 +169,8 @@ ga.GUI_Button = class(function(window, style, align, x, y)
         end
     end
 
-    function self:addHudtxt(text, x, y, align, valign, size, button_align)
-        local hudtxt = user:addHudtxt(text, x, y, align, valign, size, button_align, self)
+    function self:addHudtxt(text, x, y, button_align, size)
+        local hudtxt = user:addHudtxt(text, x, y, button_align, size, self)
         table.insert(self.hudtxts, hudtxt)
 
         return hudtxt
@@ -205,19 +205,45 @@ ga.GUI_Button = class(function(window, style, align, x, y)
     table.insert(ga.GUI_Button_list, self)
 end)
 
-ga.GUI_Hudtxt = class(function(gui, text, x, y, align, valign, size, gui_obj_align, gui_obj)
+ga.GUI_Hudtxt = class(function(gui, text, x, y, gui_obj_align, size, gui_obj)
     local screenw, screenh = 850, 480
 
     self.user = gui.user; local user = self.user
     self.gui = gui
     self.text = text
-    self.x, self.y = ga.GUI.fixpos(gui_obj_align, screenw, screenh, 0, 16, x, y)
-    self.align = align or 0
-    self.valign = valign or 0
+    self.x, self.y = ga.GUI.fixpos(gui_obj_align, screenw, screenh, 0, 0, x, y)
     self.size = size or 13
 
+    self.align = 0
+    self.valign = 0
+    if gui_obj_align == 'c' then
+        self.align = 1
+        self.valign = 1
+    elseif gui_obj_align == 'tr' then
+        self.align = 2
+        self.valign = 0
+    elseif gui_obj_align == 'br' then
+        self.align = 2
+        self.valign = 2
+    elseif gui_obj_align == 'bl' then
+        self.align = 0
+        self.valign = 2
+    elseif gui_obj_align == 'tc' then
+        self.align = 1
+        self.valign = 0
+    elseif gui_obj_align == 'bc' then
+        self.align = 1
+        self.valign = 2
+    elseif gui_obj_align == 'lc' then
+        self.align = 0
+        self.valign = 1
+    elseif gui_obj_align == 'rc' then
+        self.align = 2
+        self.valign = 1
+    end
+
     if gui_obj then
-        self.x, self.y = ga.GUI.fixpos(gui_obj_align, gui_obj.style.width, gui_obj.style.height, 0, 16, x, y)
+        self.x, self.y = ga.GUI.fixpos(gui_obj_align, gui_obj.style.width, gui_obj.style.height, 0, 0, x, y)
         self.x = self.x + gui_obj.x
         self.y = self.y + gui_obj.y
     end
@@ -227,7 +253,7 @@ ga.GUI_Hudtxt = class(function(gui, text, x, y, align, valign, size, gui_obj_ali
 
     function self:setText(txt)
         self:remove()
-        user:addHudtxt(txt or '', x, y, self.align, self.valign, self.size, gui_obj_align, gui_obj)
+        user:addHudtxt(txt or '', x, y, gui_obj_align, self.size, gui_obj)
     end
 
     function self:move(duration, x, y)

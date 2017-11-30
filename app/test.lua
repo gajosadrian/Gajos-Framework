@@ -1,6 +1,6 @@
 local ga = gajosframework
 
--- mp_respawndelay(255) -- 4min 15s
+mp_respawndelay(255) -- 4min 15s
 mp_hudscale(1)
 
 ga.GUI_Window.AddStyle('ga_mainmenu', {
@@ -12,8 +12,8 @@ ga.GUI_Window.AddStyle('ga_mainmenu', {
 ga.GUI_Button.AddStyle('slot', {
     path = 'debug',
     hover_path = 'auto',
-    width = 32,
-    height = 32,
+    width = 100,
+    height = 100,
 })
 
 function onPlayerJoin(user)
@@ -49,7 +49,7 @@ function onPlayerServeraction(user, key)
         btn.onClick = function()
             msg('works')
         end
-        btn:addHudtxt('BTN', 0, 0, 1, 'c')
+        btn:addHudtxt('BTN', 0, 0, 'c')
     elseif key == 3 then
         local menu = user:newMenu('Test title', true)
         menu:addButton('Test button', 'test description', function()
@@ -62,14 +62,21 @@ function onPlayerServeraction(user, key)
 end
 
 function onPlayerJoined(user)
-    -- user.mainMenu:show()
+    user.mainMenu:show()
 
-    local p1 = user:newMapPoint('gfx/hud_arrow.bmp', 45, 53, 1, true)
-    local p2 = user:newMapPoint('gfx/hud_arrow.bmp', 16, 16, 1, true)
-    p2:setColor(255, 0, 0)
+    -- local p1 = user:newMapPoint('gfx/hud_arrow.bmp', 45, 53, 1, true)
+    -- local p2 = user:newMapPoint('gfx/hud_arrow.bmp', 16, 16, 1, true)
+    -- p2:setColor(255, 0, 0)
 end
 
+function onPlayerAttack(user)
+    local blaster_lighting = TImage.LoadMapImage('gfx/starwars/blaster-lighting_red.png', 1, user.x, user.y, TFlags(nil), 0)
+    blaster_lighting:SetPosition(user.x, user.y, user.rot)
+    blaster_lighting:SetAlpha(0.7)
 
+    local x, y = misc.pos_trigger(user.x, user.y, user.rot, 1000)
+    blaster_lighting:AnimatePosition(500, x, y, user.rot)
+end
 
 -- function onPlayerBind(user, key, state)
 --     if state == 1 then
