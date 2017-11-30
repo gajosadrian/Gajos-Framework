@@ -37,7 +37,16 @@ function onPlayerJoin(user)
         {
             name = 'STORE',
             onShow = function(user, window)
-                msg('store')
+            end,
+        },
+        {
+            name = 'GAJOS',
+            onShow = function(user, window)
+            end,
+        },
+        {
+            name = 'UFUK',
+            onShow = function(user, window)
             end,
         },
     })
