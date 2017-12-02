@@ -2,7 +2,7 @@ local ga = gajosframework
 
 ga.MainMenuView = classExtends(View, function(user)
     local this = self
-    local room_speed = 400
+    local room_speed = 300
     self.user = user
 
     self.nav_items = {}

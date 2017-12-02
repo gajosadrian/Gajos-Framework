@@ -1,3 +1,5 @@
+parse('transfer_speed 500')
+
 gajosframework = {
     users = {},
     DIR = {

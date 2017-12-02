@@ -40,6 +40,7 @@ TImage.flag.nomasking = 3
 TImage.flag.drawalways = 10
 TImage.flag.rotate = 11
 TImage.flag.wiggle = 12
+TImage.flag.recoil = 13
 
 --- /// Image Flags Switch /// ---
 TImage.flag.switch = {
@@ -49,7 +50,8 @@ TImage.flag.switch = {
 	[3] = "n", 
 	[10] = {y = 1},
 	[11] = {x = 1},
-	[12] = {x = 2}
+	[12] = {x = 2},
+	[13] = {x = 3}
 }
 
 --- /// Constructors /// ---
