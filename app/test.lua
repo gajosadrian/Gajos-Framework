@@ -1,6 +1,6 @@
 local ga = gajosframework
 
-mp_respawndelay(255) -- 4min 15s
+-- mp_respawndelay(255) -- 4min 15s
 mp_hudscale(1)
 
 ga.GUI_Button.AddStyle('slot', {
@@ -76,7 +76,7 @@ function onPlayerServeraction(user, key)
 end
 
 function onPlayerJoined(user)
-    user.mainMenu:show()
+    -- user.mainMenu:show()
 
     -- local p1 = user:newMapPoint('gfx/hud_arrow.bmp', 45, 53, 1, true)
     -- local p2 = user:newMapPoint('gfx/hud_arrow.bmp', 16, 16, 1, true)

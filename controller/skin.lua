@@ -2,10 +2,27 @@ local ga = gajosframework
 
 ga.Skin = classExtends(Controller, function(user, path)
     self.user = user
-    self.path = path
+    self.model = ga.SkinModel.new(self, user)
+    self.view = ga.SkinView.new(user)
 
-    self.img = TImage.LoadPlayerImage('<spritesheet:' .. self.path .. ':32:32>', TImage.mode.top, user.id, TFlags(TImage.flag.recoil))
+    function self:update(weapon_id)
+        self.view:update(weapon_id)
+    end
 
     function self:remove()
+        self.view:remove()
     end
+
+    -- constructor --
+    self.view:init(path)
+    self:update(user.weapon)
 end)
+
+local function onSelect(id)
+    local user = getPlayerInstance(id)
+
+    if user._skin then
+        user._skin:update(user.weapon)
+    end
+end
+addhook('select', onSelect)

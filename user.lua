@@ -32,6 +32,18 @@ Class(ga.User, function(id)
         return self._gui:newWindow(...)
     end
 
+    function self:loadSkin(path)
+        self:removeSkin()
+        self._skin = ga.Skin.new(self, path)
+    end
+
+    function self:removeSkin()
+        if self._skin then
+            self._skin:remove()
+            self._skin = false
+        end
+    end
+
     function self:hideWeapon()
         if not self._prev_weapon and self.weapon ~= 0 then
             self._prev_weapon = self.weapon
