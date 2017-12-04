@@ -397,7 +397,7 @@ local function onClick(id, key, state)
         update(user)
     end
 end
-addhook('bind', onClick)
+addhook('key', onClick)
 addbind('mouse1')
 
 local function onHover()
