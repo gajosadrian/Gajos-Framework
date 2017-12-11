@@ -28,7 +28,7 @@ ga.Menu = classExtends(Controller, function(user, title, noskip)
 
     -- constructor
     self.model:setTitle(title)
-    self:noskip(noskip or false)
+    self:setNoskip(noskip or false)
 end)
 
 local function onMenu(id, t, btn)
