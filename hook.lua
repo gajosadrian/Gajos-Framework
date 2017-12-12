@@ -5,7 +5,7 @@ ga.hooks = {}
 _addhook = addhook
 function addhook(name, func, priority)
     if type(func) == 'string' then
-        print(ga.COLOR.RED .. 'Impossible to add hook. Do NOT use string in function argument.')
+        print(COLOR.RED .. 'Impossible to add hook. Do NOT use string in function argument.')
         return
     end
 
