@@ -31,9 +31,6 @@ function lang.getLanguageData()
             file:close()
 
             lang[name] = currentlanguage
-
-            -- print(lang('info', 3, name), 'success')
-            print(name)
         end
     end
 end
@@ -47,7 +44,7 @@ function lang.lang(user, section, line, ...)
             str = str:gsub('$' .. index, arg)
         end
     else
-        str = 'language error: section(' .. tostring(section) .. '), line(' .. tostring(line) .. ')'
+        str = 'Language error(' .. tostring(user.current_lang) .. '), section: ' .. tostring(section) .. ', line: ' .. tostring(line)
         log(str, 'error', 'debug')
     end
 
