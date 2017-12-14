@@ -15,7 +15,7 @@ function getPath()
     return str:match('(.*/)')
 end
 
-local _DIR = getPath()
+_DIR = getPath()
 
 dofile(_DIR .. 'config.lua')
 dofile(_DIR .. 'hook.lua')
@@ -33,6 +33,7 @@ end
 dofile(_DIR .. 'functions.lua')
 dofile(_DIR .. 'user.lua')
 dofile(_DIR .. 'gui.lua')
+dofile(_DIR .. 'lang.lua')
 
 do
     for _, v in pairs( {'model', 'view', 'controller'} ) do

@@ -19,6 +19,15 @@ Class(ga.User, function(id)
     self._gui = ga.GUI.new(self)
     self._prev_weapon = false
 
+    function self:lang(...)
+        return ga.lang.lang(self, ...)
+    end
+
+    self.current_lang = 'en'
+    function self:selectLang(lang)
+        self.current_lang = lang
+    end
+
     --[[
         @param {string} title   - menu's title
         @param {bool} [noskip]  - true means that you must use one of 1-9 buttons
