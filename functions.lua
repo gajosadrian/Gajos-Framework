@@ -23,7 +23,7 @@ function ga.getMessage(message, type, custom_tag)
         end,
 
         [Default] = function()
-            return '\169' .. VAR.server_color
+            return COLOR_CODE .. VAR.server_color
         end,
     }
 

@@ -72,4 +72,4 @@ do
 end
 
 _VER = '1.00'
-print('\169109104238Lua: Successfully loaded `Gajos Framework ' .. _VER .. '`')
+print(C(109, 104, 238) .. 'Lua: Successfully loaded `Gajos Framework ' .. _VER .. '`')

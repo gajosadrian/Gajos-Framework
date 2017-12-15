@@ -32,8 +32,23 @@ VAR = {
     server_color = '175255100',
 }
 
+COLOR_CODE = string.char(0xC2) .. string.char(0xA9)
+
 -- init --
+function C(r, g, b)
+    local code = COLOR_CODE
+
+    -- update: return color code when no args are passed
+    if not r then
+        return code
+    end
+
+    g = g or 0
+    b = b or 0
+    return string.format('%s%0.3u%0.3u%0.3u', code, r, g, b)
+end
+
 COLOR = {}
 for _, v in pairs(COLOR_VALUE) do
-    COLOR[_] = '\169' .. v
+    COLOR[_] = C() .. v
 end
