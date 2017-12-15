@@ -22,8 +22,17 @@ function lang.getLanguageData()
                         currentsection = line:sub(2)
                         currentline = 1
                     else
-                        currentlanguage[currentsection][currentline] = line
-                        currentline = currentline + 1
+                        if line:sub(1, 1) == '.' then
+                            local new_str = line:sub(2)
+                            local find_dot, last_pos = new_str:find('. ')
+                            find_dot, last_pos = find_dot, last_pos + 1
+                            local new_currentline = tonumber(line:sub(2, find_dot))
+
+                            currentlanguage[currentsection][new_currentline] = line:sub(last_pos)
+                        else
+                            currentlanguage[currentsection][currentline] = line
+                            currentline = currentline + 1
+                        end
                     end
                 end
             end
