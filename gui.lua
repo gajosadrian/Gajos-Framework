@@ -41,6 +41,9 @@ ga.GUI_Window_list = {}
 ga.GUI_Window_styles = {}
 ga.GUI_Window = class(function(gui, style, align, x, y)
     local screenw, screenh = 850, 480
+    if Game.mp_hudscale == 0 then
+        screenw, screenh = user.screenh, user.screenh
+    end
 
     self.user = gui.user; local user = self.user
     self.gui = gui
@@ -263,6 +266,9 @@ end)
 
 ga.GUI_Hudtxt = class(function(gui, text, x, y, gui_obj_align, size, gui_obj)
     local screenw, screenh = 850, 480
+    if Game.mp_hudscale == 0 then
+        screenw, screenh = user.screenh, user.screenh
+    end
 
     self.user = gui.user; local user = self.user
     self.gui = gui

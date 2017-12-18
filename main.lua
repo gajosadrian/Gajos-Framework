@@ -31,6 +31,7 @@ do
 end
 
 dofile(_DIR .. 'functions.lua')
+dofile(_DIR .. 'game.lua')
 dofile(_DIR .. 'user.lua')
 dofile(_DIR .. 'gui.lua')
 dofile(_DIR .. 'lang.lua')
