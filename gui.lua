@@ -40,12 +40,13 @@ end)
 ga.GUI_Window_list = {}
 ga.GUI_Window_styles = {}
 ga.GUI_Window = class(function(gui, style, align, x, y)
+    self.user = gui.user; local user = self.user
+
     local screenw, screenh = 850, 480
     if Game.mp_hudscale == 0 then
-        screenw, screenh = user.screenh, user.screenh
+        screenw, screenh = user.screenw, user.screenh
     end
 
-    self.user = gui.user; local user = self.user
     self.gui = gui
     self.style = ga.GUI_Window_styles[style]
     self.x, self.y = ga.GUI.fixpos(align, screenw, screenh, self.style.width, self.style.height, x, y)
@@ -171,7 +172,7 @@ ga.GUI_Button = class(function(window, style, align, x, y)
     self.hudtxts = {}
 
     function self:click()
-        if self.onClick and self.onClick(self.user, self.window, user.mousex, user.mousey) == 1 then
+        if self.onClick and self.onClick(self.user, self.window, user._mousex, user._mousey) == 1 then
             return
         end
         -- do nothing
@@ -181,7 +182,7 @@ ga.GUI_Button = class(function(window, style, align, x, y)
         if not self.hovered then
             self.hovered = true
 
-            if self.onHover and self.onHover(self.user, self.window, user.mousex, user.mousey) == 1 then
+            if self.onHover and self.onHover(self.user, self.window, user._mousex, user._mousey) == 1 then
                 return
             end
 
@@ -195,7 +196,7 @@ ga.GUI_Button = class(function(window, style, align, x, y)
         if self.hovered then
             self.hovered = false
 
-            if self.onUnhover and self.onUnhover(self.user, self.window, user.mousex, user.mousey) == 1 then
+            if self.onUnhover and self.onUnhover(self.user, self.window, user._mousex, user._mousey) == 1 then
                 return
             end
 
@@ -265,12 +266,13 @@ ga.GUI_Button = class(function(window, style, align, x, y)
 end)
 
 ga.GUI_Hudtxt = class(function(gui, text, x, y, gui_obj_align, size, gui_obj)
+    self.user = gui.user; local user = self.user
+
     local screenw, screenh = 850, 480
     if Game.mp_hudscale == 0 then
-        screenw, screenh = user.screenh, user.screenh
+        screenw, screenh = user.screenw, user.screenh
     end
 
-    self.user = gui.user; local user = self.user
     self.gui = gui
     self.text = text
     self.x, self.y = ga.GUI.fixpos(gui_obj_align, screenw, screenh, 0, 0, x, y)
@@ -367,7 +369,7 @@ end
 
 -- init --
 local function update(user)
-    local x, y = user.mousex, user.mousey
+    local x, y = user._mousex, user._mousey
 
     for _, v in pairs(ga.GUI_Button_list) do
         if v.user == user then
@@ -396,7 +398,12 @@ local function onClick(id, key, state)
         if key == 'mouse1' then
             if state == 0 then
                 user._gui.clicked = true
-                reqcld(user.id, 0)
+
+                if user.health <= 0 then
+                    reqcld(user.id, 0)
+                else
+                    user._mousex, user._mousey = user.mousex, user.mousey
+                end
             end
         end
 
@@ -409,20 +416,24 @@ addbind('mouse1')
 local function onHover()
     for _, id in pairs(player(0, 'table')) do
         local user = getPlayerInstance(id)
-        reqcld(user.id, 0)
+
+        if user.health <= 0 then
+            reqcld(user.id, 0)
+        else
+            user._mousex, user._mousey = user.mousex, user.mousey
+        end
+
         update(user)
     end
 end
 addhook('ms100', onHover)
 
---TEST
-function onClientdata(id, mode, x, y)
+local function onClientdata(id, mode, x, y)
     local user = getPlayerInstance(id)
-
     if not user then return end
 
     if mode == 0 then
-        user.mousex, user.mousey = x, y
+        user._mousex, user._mousey = x, y
     end
 end
 addhook('clientdata', onClientdata)
