@@ -98,11 +98,13 @@ InventoryData = classExtends(Controller, function(user)
             for _, i in pairs(slots_to_remove) do
                 i.item = false
 
-                local array = table.toTable(i.item.xy, '-')
-                local x, y = array[1], array[2]
-                for yy = 1, i.size - 1 do
-                    local new_slot = self.slots[x .. '-' .. (y + yy)]
-                    new_slot.item = false
+                if not i.locked then
+                    local array = table.toTable(i.item.xy, '-')
+                    local x, y = array[1], array[2]
+                    for yy = 1, i.size - 1 do
+                        local new_slot = self.slots[x .. '-' .. (y + yy)]
+                        new_slot.item = false
+                    end
                 end
             end
 
@@ -117,7 +119,7 @@ InventoryData = classExtends(Controller, function(user)
     end
 end)
 
-function inventoryData:swapSlots(slot1, slot2)
+function InventoryData:swapSlots(slot1, slot2)
     local temp1, temp2 = slot1.item, slot2.item
 
     slot1.item = temp2

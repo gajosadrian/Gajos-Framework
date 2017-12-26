@@ -1,4 +1,4 @@
-Item = class(function(item_id, amount)
+Item = classExtends(Controller, function(item_id, amount)
     local conf = ITEMS[item_id]
 
     self.id = item_id
@@ -9,8 +9,8 @@ Item = class(function(item_id, amount)
     self.drop_amount = conf.drop_amount or 1
     self.health = conf.health
     self.stack = conf.stack or 1
-    self.amount = 0
     self.vars = conf.vars or false
+    self.amount = 0
     self.onHover = false
     self.onUnhover = false
 
@@ -59,13 +59,13 @@ Item = class(function(item_id, amount)
     end
 
     -- CONTROLLER --
-    function self:onHover(user, window, button)
+    function self:onHover(...)
         if self.onHover then
             self.onHover(...)
         end
     end
 
-    function self:onUnhover()
+    function self:onUnhover(...)
         if self.onUnhover then
             self.onUnhover(...)
         end
