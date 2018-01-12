@@ -1,4 +1,4 @@
-InventoryData = classExtends(Controller, function(user)
+InventoryData = classExtends(Controller, function(user, xsize, ysize)
     self.user = user
     self.xsize = xsize
     self.ysize = ysize

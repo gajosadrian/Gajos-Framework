@@ -2,6 +2,17 @@ local ga = gajosframework
 
 -- mp_respawndelay(255) -- 4min 15s
 -- mp_hudscale(1)
+mp_hud(0)
+
+ITEMS = {
+    [1] = {
+        name = 'Test',
+        path = 'gfx/cs2d.bmp',
+        vars = {
+            -- 
+        }
+    }
+}
 
 ga.GUI_Button.AddStyle('slot', {
     path = 'debug',
@@ -12,12 +23,10 @@ ga.GUI_Button.AddStyle('slot', {
 ga.GUI_Window.AddStyle('test', {
     path = 'gfx/inventory.png',
     width = 170,
-    height = 430,
+    height = 558,
 })
 
 function onPlayerJoin(user)
-    user.inv = InventoryData.new(user)
-
     local menu = user.mainMenu
     menu:setBackground('gfx/starwars/menu-background.jpg', 0.3)
     menu:setNavItems({
@@ -89,8 +98,7 @@ function onPlayerJoined(user)
     -- local p2 = user:newMapPoint('gfx/hud_arrow.bmp', 16, 16, 1, true)
     -- p2:setColor(255, 0, 0)
 
-    local window = user:newWindow('test', 'br', 0, 0)
-    window:addButton('slot', 'c', 0, 0)
+    user.inv = Inventory.new(user, 5, 9, 'test', 'br', 0, 38)
 end
 
 function onPlayerAttack(user)
