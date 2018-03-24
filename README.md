@@ -1,6 +1,6 @@
 # Gajos Framework
 
-Script framework for CS2D to make you life easier
+Script framework for CS2D to make your life easier
 
 ## Getting Started
 
