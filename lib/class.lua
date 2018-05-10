@@ -1,22 +1,3 @@
---Class_uniqueID_counter = 0
-function Class(namespace,constructor)
-    namespace.__index = namespace
-    namespace.new = function(...)
-        local outerSelf = self -- used to allow constructors inside constructors
-        -- aliases
-        local this = {}
-        self = this
-        -- id counter
-            --Class_uniqueID_counter = Class_uniqueID_counter + 1
-            --this.uniqueID = Class_uniqueID_counter
-        -- finish
-        setmetatable(this,namespace)
-        constructor(unpack(arg))
-        self = outerSelf -- used to allow constructors inside constructors
-        return this
-    end
-end
-
 local function tableContains(table, element)
   for _, value in pairs(table) do
     if value == element then
@@ -99,3 +80,27 @@ classname = class(function(static)
   end
 end) -- do not return
 ]]--
+
+
+
+
+
+
+--Class_uniqueID_counter = 0
+-- function Class(namespace,constructor)
+--     namespace.__index = namespace
+--     namespace.new = function(...)
+--         local outerSelf = self -- used to allow constructors inside constructors
+--         -- aliases
+--         local this = {}
+--         self = this
+--         -- id counter
+--             --Class_uniqueID_counter = Class_uniqueID_counter + 1
+--             --this.uniqueID = Class_uniqueID_counter
+--         -- finish
+--         setmetatable(this,namespace)
+--         constructor(unpack(arg))
+--         self = outerSelf -- used to allow constructors inside constructors
+--         return this
+--     end
+-- end
