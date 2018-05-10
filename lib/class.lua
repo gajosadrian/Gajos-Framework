@@ -63,7 +63,7 @@ function classExtends(extend, constructor)
   return namespace
 end
 
-abstract_class = class
+abstractClass = class
 
 -- how to
 
